@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Debug.Log("Hola");
+        Debug.Log("Chau");
     }
 
     // Update is called once per frame
