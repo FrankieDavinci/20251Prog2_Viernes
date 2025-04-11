@@ -12,8 +12,22 @@ public class Player : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] float _jumpForce;
 
+    [Header("Animation Parameters")]
+    [SerializeField] string _isMovingParameter;
+    [SerializeField] string _punchParameter;
+    [SerializeField] string _xAxiParameter;
+    [SerializeField] string _zAxiParameter;
+    int _isMovingId;
+    int _punchId;
+    int _xAxiId;
+    int _zAxiId;
+
     [Header("Keys")]
     [SerializeField] KeyCode _jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode _punchKey = KeyCode.Mouse0;
+
+    [Header("Punch")]
+    [SerializeField] BoxCollider _punchCollider;
 
     Vector3 _direction;
 
@@ -30,6 +44,34 @@ public class Player : MonoBehaviour
         //_rb.constraints = RigidbodyConstraints.FreezeRotationY | 
         //                    RigidbodyConstraints.FreezeRotationX;
         _direction = Vector3.zero;
+
+        _isMovingId = Animator.StringToHash(_isMovingParameter);
+        _punchId = Animator.StringToHash(_punchParameter);
+        _xAxiId = Animator.StringToHash(_xAxiParameter);
+        _zAxiId = Animator.StringToHash(_zAxiParameter);
+    }
+
+    private void OnEnable()
+    {
+        var camera = Camera.main;
+
+        if (camera != null)
+        {
+            if (camera.TryGetComponent(out FollowTarget followTarget))
+            {
+                followTarget.SetTarget(transform);
+            }
+        }
+    }
+
+    private void Start()
+    {
+        var punchEvents = _animator.GetBehaviour<PunchEventsBehavior>();
+
+        if (punchEvents)
+        {
+            punchEvents.SetCollider(_punchCollider);
+        }
     }
 
     void Update()
@@ -39,11 +81,20 @@ public class Player : MonoBehaviour
             _jumpPressed = true;
         }
 
+        if (Input.GetKeyDown(_punchKey) && _isGrounded)
+        {
+            _animator.SetTrigger(_punchId);
+        }
+
+        var isMoving = _direction.x != 0 || _direction.z != 0;
+
+        _animator.SetBool(_isMovingId, isMoving);
+
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
 
-        _animator.SetFloat("xAxi", _direction.x);
-        _animator.SetFloat("zAxi", _direction.z);
+        _animator.SetFloat(_xAxiId, _direction.x);
+        _animator.SetFloat(_zAxiId, _direction.z);
     }
 
 
@@ -82,4 +133,5 @@ public class Player : MonoBehaviour
     {
         _isGrounded = true;
     }
+    
 }
