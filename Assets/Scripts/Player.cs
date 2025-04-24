@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
         _punchId = Animator.StringToHash(_punchParameter);
         _xAxiId = Animator.StringToHash(_xAxiParameter);
         _zAxiId = Animator.StringToHash(_zAxiParameter);
+
+        // PlayerReference.player = this;
     }
 
     private void OnEnable()
@@ -62,6 +65,9 @@ public class Player : MonoBehaviour
                 followTarget.SetTarget(transform);
             }
         }
+
+        PlayerReference.Instance.player = this;
+        
     }
 
     private void Start()
@@ -133,5 +139,9 @@ public class Player : MonoBehaviour
     {
         _isGrounded = true;
     }
-    
+
+    // private void OnDestroy()
+    // {
+    //     PlayerReference.player = null;
+    // }
 }
