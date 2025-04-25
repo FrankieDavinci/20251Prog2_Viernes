@@ -733,7 +733,6 @@ MonoBehaviour:
     RefIds:
     - rid: 1701765370735230982
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &485729184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3222,7 +3221,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3297,25 +3295,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.19287752, y: 0.0064681475, z: -0.0012720771, w: -0.98120075}
-  m_LocalPosition: {x: 4.017428, y: 4.026848, z: -7.899645}
+  m_LocalRotation: {x: 0.04413155, y: -0, z: -0, w: 0.99902576}
+  m_LocalPosition: {x: 0, y: -0.22, z: -2.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fef0cd33a074d3b4ebba1d53e1859a8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Father: {fileID: 2039174782}
+  m_LocalEulerAnglesHint: {x: 5.059, y: 0, z: 0}
 --- !u!1 &1014273803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3567,7 +3553,6 @@ MonoBehaviour:
     RefIds:
     - rid: 1701765370735230982
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &1155922896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4165,6 +4150,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 436822587}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1400925788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1400925789}
+  m_Layer: 0
+  m_Name: Camera Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1400925789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400925788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2020475995}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1585364512
 GameObject:
@@ -7193,6 +7209,65 @@ MonoBehaviour:
   m_IgnoreFromBuild: 0
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!4 &2020475995 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1532110983276529272, guid: 3605a78ab6f79654f948ecd227f321fd, type: 3}
+  m_PrefabInstance: {fileID: 3779444951440786956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2039174781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2039174782}
+  - component: {fileID: 2039174783}
+  m_Layer: 0
+  m_Name: Camera Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2039174782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039174781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.28537482, y: -0, z: -0, w: 0.958416}
+  m_LocalPosition: {x: 3.72, y: 2.84, z: -4.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 963194228}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 33.163, y: 0, z: 0}
+--- !u!114 &2039174783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039174781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc917615af4736498e9851e51e95bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lockMode: 1
+  _visible: 0
+  _detectionRadius: 0.1
+  _hitOffset: 0.25
+  _mouseSensitivity: 500
+  _minDistance: 0.25
+  _maxDistance: 5
+  _minRotation: -45
+  _maxRotation: 80
 --- !u!1 &2079995395
 GameObject:
   m_ObjectHideFlags: 0
@@ -7348,7 +7423,6 @@ MonoBehaviour:
     RefIds:
     - rid: 1701765370735230982
       type: {class: Cube, ns: UnityEngine.ProBuilder.Shapes, asm: Unity.ProBuilder}
-      data: 
 --- !u!114 &2079995402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7953,16 +8027,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6379342846781370774, guid: 3605a78ab6f79654f948ecd227f321fd, type: 3}
+      propertyPath: _cameraTarget
+      value: 
+      objectReference: {fileID: 1400925789}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1532110983276529272, guid: 3605a78ab6f79654f948ecd227f321fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1400925789}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3605a78ab6f79654f948ecd227f321fd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 963194228}
+  - {fileID: 2039174782}
   - {fileID: 705507995}
   - {fileID: 3779444951440786956}
   - {fileID: 1014273804}

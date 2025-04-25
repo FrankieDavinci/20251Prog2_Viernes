@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     [SerializeField] float _speed;
     [SerializeField] float _jumpForce;
+    [SerializeField] Transform _cameraTarget;
+    public Transform CameraTarget { get { return _cameraTarget; } }
 
     [Header("Animation Parameters")]
     [SerializeField] string _isMovingParameter;
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
 
     [Header("Punch")]
     [SerializeField] BoxCollider _punchCollider;
+
+    Transform _camTransform;
 
     Vector3 _direction;
 
@@ -78,6 +82,8 @@ public class Player : MonoBehaviour
         {
             punchEvents.SetCollider(_punchCollider);
         }
+
+        _camTransform = Camera.main.transform;
     }
 
     void Update()
@@ -123,16 +129,26 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        if (_direction.sqrMagnitude > 1)
-        {
-            _direction.Normalize();
-        }
+        var camForward = _camTransform.forward;
+        var camRight = _camTransform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        transform.forward = camForward;
+
+        _direction = (camRight * _direction.x + camForward * _direction.z);
+
+        //if (_direction.sqrMagnitude > 1)
+        //{
+        //    _direction.Normalize();
+        //}
 
         //transform.position += _direction * (_speed * Time.fixedDeltaTime);
 
         //_rb.velocity = 
         //_rb.AddForce(_direction * _speed, ForceMode.Acceleration);
-        _rb.MovePosition(transform.position + _direction * (_speed * Time.fixedDeltaTime));
+        _rb.MovePosition(transform.position + Vector3.ClampMagnitude(_direction, 1) * (_speed * Time.fixedDeltaTime));
     }
 
     private void OnCollisionEnter(Collision collision)
