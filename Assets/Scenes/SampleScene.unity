@@ -8031,6 +8031,10 @@ PrefabInstance:
       propertyPath: _cameraTarget
       value: 
       objectReference: {fileID: 1400925789}
+    - target: {fileID: 6379342846781370774, guid: 3605a78ab6f79654f948ecd227f321fd, type: 3}
+      propertyPath: _wallMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

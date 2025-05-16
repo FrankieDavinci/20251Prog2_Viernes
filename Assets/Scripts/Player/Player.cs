@@ -32,6 +32,14 @@ public class Player : MonoBehaviour
     [Header("Punch")]
     [SerializeField] BoxCollider _punchCollider;
 
+    [Header("Ground Detection")]
+    [SerializeField] float _jumpRayDistance = .2f;
+    [SerializeField] LayerMask _jumpMask;
+    
+    [Header("Wall Detection")]
+    [SerializeField] float _wallRayDistance = .75f;
+    [SerializeField] LayerMask _wallMask;
+
     Transform _camTransform;
 
     Vector3 _direction;
@@ -105,26 +113,58 @@ public class Player : MonoBehaviour
         _direction.x = Input.GetAxis("Horizontal");
         _direction.z = Input.GetAxis("Vertical");
 
-        _animator.SetFloat(_xAxiId, _direction.x);
-        _animator.SetFloat(_zAxiId, _direction.z);
     }
 
 
     private void FixedUpdate()
     {
-        Movement();
+        if (IsDirectionBlocked(_direction))
+        {
+            _direction = Vector3.zero;
+            RotateBasedOnCamera();
+        }
+        else
+        {
+            Movement();
+        }
+
+        _animator.SetFloat(_xAxiId, _direction.x);
+        _animator.SetFloat(_zAxiId, _direction.z);
 
         if (_jumpPressed)
         {
             Jump();
             _jumpPressed = false;
         }
+
+        _isGrounded = GroundDetection();
+        _animator.SetBool("Grounded", _isGrounded);
+    }
+
+    bool IsDirectionBlocked(Vector3 direction)
+    {
+        var rayDir = (transform.right * direction.x + transform.forward * direction.z);
+        var wallRay = new Ray(transform.position, rayDir);
+
+        Debug.DrawLine(transform.position, transform.position + rayDir * 2, Color.red, 1);
+
+        return Physics.Raycast(wallRay, _wallRayDistance, _wallMask);
+    }
+
+    bool GroundDetection()
+    {
+        var jumpOffset = transform.position + Vector3.up * _jumpRayDistance/2;
+
+        var jumpRay = new Ray(jumpOffset, -Vector3.up);
+
+        //Debug.DrawLine(jumpOffset, jumpOffset - Vector3.up * _jumpRayDistance, Color.red, 1);
+
+        return Physics.SphereCast(jumpRay, 0.19f , _jumpRayDistance, _jumpMask);
     }
 
     void Jump()
     {
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
-        _isGrounded = false;
     }
 
     void Movement()
@@ -135,9 +175,9 @@ public class Player : MonoBehaviour
         camForward.y = 0;
         camRight.y = 0;
 
-        transform.forward = camForward;
+        UpdateForward(camForward);
 
-        _direction = (camRight * _direction.x + camForward * _direction.z);
+        var direction = (camRight * _direction.x + camForward * _direction.z);
 
         //if (_direction.sqrMagnitude > 1)
         //{
@@ -148,12 +188,20 @@ public class Player : MonoBehaviour
 
         //_rb.velocity = 
         //_rb.AddForce(_direction * _speed, ForceMode.Acceleration);
-        _rb.MovePosition(transform.position + Vector3.ClampMagnitude(_direction, 1) * (_speed * Time.fixedDeltaTime));
+        _rb.MovePosition(transform.position + Vector3.ClampMagnitude(direction, 1) * (_speed * Time.fixedDeltaTime));
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void UpdateForward(Vector3 direction)
     {
-        _isGrounded = true;
+        transform.forward = direction;
+    }
+
+    void RotateBasedOnCamera()
+    {
+        var camForward = _camTransform.forward;
+        camForward.y = 0;
+
+        UpdateForward(camForward);
     }
 
     // private void OnDestroy()
