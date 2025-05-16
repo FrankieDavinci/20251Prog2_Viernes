@@ -96,6 +96,7 @@ public class CameraController : MonoBehaviour
         {
             Vector3 dir = (_hitInfo.point - transform.position) + (_hitInfo.normal * _hitOffset);
             
+
             if (dir.sqrMagnitude <= Mathf.Pow(_minDistance, 2))
             {
                 _camPosition = transform.position + _direction * _minDistance;
