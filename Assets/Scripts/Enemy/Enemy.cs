@@ -67,7 +67,6 @@ public class Enemy : MonoBehaviour
                 if (!_agent.isStopped)
                     _agent.isStopped = true;
                 
-                Debug.Log("Japish");
             }
             else // Sino
             {
@@ -108,7 +107,6 @@ public class Enemy : MonoBehaviour
         while (currentBurningTimes < burningTimes)
         {
             currentBurningTimes++;
-            Debug.LogWarning("Damage");
             yield return new WaitForSeconds(damageTicks);
         }
     }
